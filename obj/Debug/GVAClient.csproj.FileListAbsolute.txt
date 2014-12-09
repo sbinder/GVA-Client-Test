@@ -1,0 +1,5 @@
+C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\bin\GVAClient.dll.config
+C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\bin\GVAClient.dll
+C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\bin\GVAClient.pdb
+C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\obj\Debug\GVAClient.dll
+C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\obj\Debug\GVAClient.pdb
