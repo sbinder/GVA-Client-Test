@@ -3,3 +3,4 @@ C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\bin\GV
 C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\bin\GVAClient.pdb
 C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\obj\Debug\GVAClient.dll
 C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\obj\Debug\GVAClient.pdb
+C:\Users\canto_000\Documents\Visual Studio 2013\Projects\MCP2-1\GVAClient\obj\Debug\GVAClient.csprojResolveAssemblyReference.cache

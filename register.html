@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Opening Page</title>        
+        <link href="Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+        <link href="Content/GvaClient.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container">
+
+            <div id="connecting">
+                <h4>Connecting...</h4>
+            </div>
+            <div id="EULA">
+                <h3>Accept the EULA or else.</h3>
+                <textarea id="EULABox">This is the EULA agreement. Everything is your fault. Nothing is our fault. Got it?</textarea>
+                <p>By clicking "Accept and using the product, I indicate that I have read, understood, and agree to the terms of the End-User License Agreement"</p>
+                <form id="eulaForm">
+                    <input type="submit" value="I Agree" class="btn btn-lg btn-primary btn-block" />
+                </form>
+            </div>
+            <div id="Register1">
+                <form id="reg1Form">
+                    <h3>Enter your Store key.</h3>
+                    <input type="text" class="form-control" id="StoreKey" />
+                    <input type="submit" id="reg1reg" value="Register" class="btn btn-lg btn-primary" /> 
+                    <input type="submit" id="reg1demo" value="Demo Mode" class="btn btn-lg btn-primary" />
+                </form>
+            </div>
+            <div id="Register2">
+                <h3>Select your license.</h3>
+            </div>
+        </div> <!-- /container -->
+
+        <script src="Scripts/jquery-2.1.1.min.js"></script>
+        <script src="Scripts/jquery-ui-1.11.2.min.js"></script>
+        <script src="Scripts/bootstrap.min.js"></script>
+        <script src="Scripts/CookieJar.js"></script>
+        <script src="Scripts/register_view_controller.js"></script>
+    </body>
+</html>
