@@ -27,17 +27,20 @@ class @CookieJar
       toWrite += ';expires=' + expire.toGMTString() if expire?
       document.cookie = toWrite
 
+   @writeTemp: (name, val) ->
+      @writeCookie(name, val)
+
    @readLocal: (name) ->
       if window.Storage and window.JSON
-         raw = localStorage.getItem(name)
-         #alert 'Local Storage: ' + raw
-         return JSON.parse(raw) if raw
+         rw = localStorage.getItem(name)
+         #return localStorage.getItem(name) 
+         return JSON.parse(rw) if (@rw?)
       return null
 
    @readSession: (name) ->
       if window.Storage and window.JSON
-         raw = sessionStorage.getItem(name)
-         return JSON.parse(raw) if raw
+         rw = sessionStorage.getItem(name)
+         return JSON.parse(rw) if (@rw?)
       return null
 
    @writeLocal: (name, val) ->

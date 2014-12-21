@@ -133,6 +133,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\register_view_controller.coffee" />
     <Content Include="Scripts\CookieJar - Copy.coffee" />
+    <Content Include="Scripts\tx_view_controller.coffee" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -146,6 +147,13 @@
       <DependentUpon>register_view_controller.coffee</DependentUpon>
     </Content>
     <Content Include="Scripts\SerializeObject.js" />
+    <Content Include="Scripts\tx_view_controller.js">
+      <DependentUpon>tx_view_controller.coffee</DependentUpon>
+    </Content>
+    <Content Include="Scripts\tx_view_controller.min.js">
+      <DependentUpon>tx_view_controller.coffee</DependentUpon>
+    </Content>
+    <Content Include="tx.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

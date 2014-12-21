@@ -4,7 +4,6 @@ class @IndexViewController
    XID: null   # hold current exchange ID
 
    constructor: ->
-      #API = 'http://localhost:54870/'
       @hideAll()
       $('#signinForm input[type="submit"]').click (event) =>
          event.preventDefault()         
@@ -18,15 +17,10 @@ class @IndexViewController
          window.location.replace 'register.html'
 
    initialAuth: =>
-
-      #alert @API + 'api/initial/'
-
       return if (!@XID? || @XID == '') #safety valve
       @showConnecting()
-      #alert "Sending request (" + @XID + ")"
       $.ajax({
          type: 'GET',
-         #url: 'http://localhost:54870/api/initial/' + @XID,
          url: @API + 'api/initial/' + @XID,
          success: (data, status, jqxhr)=>
             @gotInit(data)
@@ -36,10 +30,8 @@ class @IndexViewController
       dat = $('form#signinForm').serialize()
       return if (!@XID? || @XID == '') #safety valve
       @showConnecting()
-      #alert "Sending request (" + @XID + ")"
       $.ajax({
          type: 'POST',
-         #url: 'http://localhost:54870/client/authenticate'
          url: @API + 'client/authenticate',
          data: dat,
          success: (data, status, jqxhr)=>
@@ -47,16 +39,23 @@ class @IndexViewController
       })
    
    gotLogin: (data) ->
-      # store info
+      d = $.parseJSON(data)      
+      CookieJar.write('xid', d.xid)
+      #CookieJar.writeTemp('oid', data.xid)
+      CookieJar.write('oid', d.oid)
+      window.location.replace('tx.html')
+
+      ### store info
 
       # TEST ONLY
       $('#keyhole').html(data)
-      ## TEST
+      # TEST
 
       @hideAll()
       #d = $.parseJSON(data)      
       $('#TXCenter').fadeIn()
       $('#ActTel').focus()
+      ###
 
    gotInit: (data) ->
       # store info
@@ -81,7 +80,7 @@ class @IndexViewController
    hideAll: ->
       $('div#connecting').hide()
       $('div#Signin').hide()
-      $('div#TXCenter').hide()
+      #$('div#TXCenter').hide()
       
    showConnecting: ->
       @hideAll()

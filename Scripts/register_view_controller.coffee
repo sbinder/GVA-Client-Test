@@ -1,7 +1,7 @@
 ﻿# CoffeeScript
 class @IndexViewController
    XID: null   # hold current exchange ID
-   #jar: null   # hold cookie jar
+   API: 'http://localhost:54870/'
 
    constructor: ->
 
@@ -12,8 +12,7 @@ class @IndexViewController
          @initialAuth()
       $('#reg1demo').click (event) =>
          event.preventDefault()
-         CookieJar.writeCookie('xid', 1)  #temp cookie
-         #CookieJar.write('xid', 1)
+         CookieJar.writeTemp('xid', 1)  #temp cookie
          window.location.replace 'index.html'
       $('#reg1reg').click (event) =>
          event.preventDefault()
@@ -37,15 +36,17 @@ class @IndexViewController
       return if (!@XID? || @XID == '') #safety valve
       $.ajax({
          type: 'GET',
-         url: 'http://localhost:54870/api/initial/' + @XID,
+         #url: 'http://localhost:54870/api/initial/' + @XID,
+         url: @API + 'api/initial/' + @XID,
          success: (data, status, jqxhr)=>
             @gotInit(data)
       })
    
    gotInit: (data) ->
       # store info
-
+      
       # TEST ONLY
+      #alert 'Got init.'
       $('#keyhole').html(data)
       ## TEST
 

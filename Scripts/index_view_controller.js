@@ -60,10 +60,23 @@
     };
 
     IndexViewController.prototype.gotLogin = function(data) {
-      $('#keyhole').html(data);
-      this.hideAll();
-      $('#TXCenter').fadeIn();
-      return $('#ActTel').focus();
+      var d;
+      d = $.parseJSON(data);
+      CookieJar.write('xid', d.xid);
+      CookieJar.write('oid', d.oid);
+      return window.location.replace('tx.html');
+
+      /* store info
+      
+       * TEST ONLY
+      $('#keyhole').html(data)
+       * TEST
+      
+      @hideAll()
+       *d = $.parseJSON(data)      
+      $('#TXCenter').fadeIn()
+      $('#ActTel').focus()
+       */
     };
 
     IndexViewController.prototype.gotInit = function(data) {
@@ -87,8 +100,7 @@
 
     IndexViewController.prototype.hideAll = function() {
       $('div#connecting').hide();
-      $('div#Signin').hide();
-      return $('div#TXCenter').hide();
+      return $('div#Signin').hide();
     };
 
     IndexViewController.prototype.showConnecting = function() {

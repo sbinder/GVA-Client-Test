@@ -48,23 +48,27 @@
       return document.cookie = toWrite;
     };
 
+    CookieJar.writeTemp = function(name, val) {
+      return this.writeCookie(name, val);
+    };
+
     CookieJar.readLocal = function(name) {
-      var raw;
+      var rw;
       if (window.Storage && window.JSON) {
-        raw = localStorage.getItem(name);
-        if (raw) {
-          return JSON.parse(raw);
+        rw = localStorage.getItem(name);
+        if ((this.rw != null)) {
+          return JSON.parse(rw);
         }
       }
       return null;
     };
 
     CookieJar.readSession = function(name) {
-      var raw;
+      var rw;
       if (window.Storage && window.JSON) {
-        raw = sessionStorage.getItem(name);
-        if (raw) {
-          return JSON.parse(raw);
+        rw = sessionStorage.getItem(name);
+        if ((this.rw != null)) {
+          return JSON.parse(rw);
         }
       }
       return null;

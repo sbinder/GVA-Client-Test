@@ -2,6 +2,8 @@
   this.IndexViewController = (function() {
     IndexViewController.prototype.XID = null;
 
+    IndexViewController.prototype.API = 'http://localhost:54870/';
+
     function IndexViewController() {
       this.hideAll();
       $('#eulaForm input[type="submit"]').click((function(_this) {
@@ -14,7 +16,7 @@
       $('#reg1demo').click((function(_this) {
         return function(event) {
           event.preventDefault();
-          CookieJar.writeCookie('xid', 1);
+          CookieJar.writeTemp('xid', 1);
           return window.location.replace('index.html');
         };
       })(this));
@@ -39,7 +41,7 @@
       }
       return $.ajax({
         type: 'GET',
-        url: 'http://localhost:54870/api/initial/' + this.XID,
+        url: this.API + 'api/initial/' + this.XID,
         success: (function(_this) {
           return function(data, status, jqxhr) {
             return _this.gotInit(data);
