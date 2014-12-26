@@ -38,14 +38,20 @@ div#GiftCenter {
   display: none;
   position: relative; }
   div#GiftCenter div#current, div#GiftCenter div#new {
-    font-size: 100%; }
+    font-size: 100%;
+    text-align: center;
+    padding: 6px;
+    border: 1px solid darkblue;
+    border-radius: 5px;
+    width: 20%; }
+    div#GiftCenter div#current .val, div#GiftCenter div#new .val {
+      font-weight: bold; }
   div#GiftCenter div#current {
-    float: left;
-    width: 18%; }
+    background-color: #E0E0E0;
+    float: left; }
   div#GiftCenter div#new {
-    float: right;
-    text-align: right;
-    width: 18%; }
+    background-color: #d3ff66;
+    float: right; }
   div#GiftCenter div#plusminus {
     margin: 0 auto;
     width: 60%;

@@ -41,15 +41,22 @@ div#GiftCenter {
     position:relative;
     div#current, div#new {
         font-size:100%;
+        text-align:center;        
+        padding:6px;
+         border:1px solid darkblue;
+         border-radius:5px;
+         width:20%;
+         .val {
+             font-weight:bold;
+         }
     }
     div#current {
+        background-color:#E0E0E0;
         float:left;
-        width:18%;
     }
     div#new {
-        float:right;
-        text-align:right;
-        width:18%;
+        background-color:#d3ff66;
+        float:right;        
     }
     div#plusminus {        
         margin: 0 auto;
