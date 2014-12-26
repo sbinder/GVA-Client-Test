@@ -10,7 +10,8 @@
         return function(event) {
           event.preventDefault();
           _this.XID = '0';
-          return _this.initialAuth();
+          $('div#EULA').hide();
+          return $('div#Register1').fadeIn();
         };
       })(this));
       $('#reg1demo').click((function(_this) {
@@ -27,46 +28,47 @@
         };
       })(this));
       this.XID = CookieJar.read('xid');
-      if ((this.XID != null) && this.XID !== '') {
-        this.initialAuth();
-      } else {
-        $('#EULA').show();
-      }
+      $('#EULA').show();
     }
 
-    IndexViewController.prototype.initialAuth = function() {
-      this.showConnecting();
-      if ((this.XID == null) || this.XID === '') {
-        return;
-      }
-      return $.ajax({
-        type: 'GET',
-        url: this.API + 'api/initial/' + this.XID,
-        success: (function(_this) {
-          return function(data, status, jqxhr) {
-            return _this.gotInit(data);
-          };
-        })(this)
-      });
-    };
 
-    IndexViewController.prototype.gotInit = function(data) {
-      var d;
-      $('#keyhole').html(data);
-      this.hideAll();
-      d = $.parseJSON(data);
-      if (d.Key === 0) {
-        $('div#Register1').fadeIn();
-        return;
-      }
-      if (d.Key === 1) {
-        $('input#username').val("Demonstration").attr("disabled", "disabled");
-        $('input#password').val("Demonstration").attr("disabled", "disabled");
-      }
-      if (d.Key === 1 || d.Key.length > 12) {
-        return $('div#Signin').fadeIn();
-      }
-    };
+    /*
+       if (@XID? && @XID != '')
+          @initialAuth() 
+       else 
+          $('#EULA').show()
+    
+    
+    initialAuth: ->
+       @showConnecting()
+       return if (!@XID? || @XID == '') #safety valve
+       $.ajax({
+          type: 'GET',
+           *url: 'http://localhost:54870/api/initial/' + @XID,
+          url: @API + 'client/initial/' + @XID,
+          success: (data, status, jqxhr)=>
+             @gotInit(data)
+       })
+    
+    gotInit: (data) ->
+        * store info
+       
+        * TEST ONLY
+        *alert data
+       $('#keyhole').html(data)
+        *# TEST
+    
+       @hideAll()
+       d = data.Token
+       if d == "0"   #d.Key == 0
+          $('div#Register1').fadeIn()
+          return
+       if d == "1"   #d.Key == 1  # DEMO Mode
+          $('input#username').val("Demonstration").attr("disabled", "disabled")
+          $('input#password').val("Demonstration").attr("disabled", "disabled")
+       if d == "1" || d.length > 12 #d.Key == 1 || d.Key.length > 12
+          $('div#Signin').fadeIn()
+     */
 
     IndexViewController.prototype.hideAll = function() {
       $('div#connecting').hide();

@@ -1,3 +1,6 @@
+body {
+  font: "Helvetica Neue", Arial, Helvetica, sans-serif; }
+
 #EULA, #Register1, #Register2 {
   display: none; }
 
@@ -19,7 +22,7 @@ div#EULA, div#Register1, div#Signin {
   margin-right: auto;
   max-width: 30em; }
 
-div#Register1, div#Signin, form#TX {
+div#Register1, div#Signin, form#TX, div#GiftCenter {
   max-width: 30em;
   margin-left: auto;
   margin-right: auto; }
@@ -30,10 +33,42 @@ div#Register1, div#Signin, form#TX {
 input[type="submit"], button[type="button"] {
   margin-top: 6px; }
 
-/*
-div#TXCenter div {
-    width:100%;
-    text-align:center;
-}
-*/
+div#GiftCenter {
+  /*font-family: 'Yanone Kaffeesatz', sans-serif;  */
+  display: none;
+  position: relative; }
+  div#GiftCenter div#current, div#GiftCenter div#new {
+    font-size: 100%; }
+  div#GiftCenter div#current {
+    float: left;
+    width: 18%; }
+  div#GiftCenter div#new {
+    float: right;
+    text-align: right;
+    width: 18%; }
+  div#GiftCenter div#plusminus {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center; }
+    div#GiftCenter div#plusminus button {
+      /*margin:0 2px;*/
+      width: 8em; }
+  div#GiftCenter div#amount {
+    /*font-family: 'Dorsa', sans-serif;*/
+    /*font-family: 'Medula One', cursive;*/
+    color: red;
+    font-size: 300%;
+    width: 100%;
+    top: -18px;
+    text-align: center; }
+  div#GiftCenter div#actions {
+    width: 100%;
+    margin-top: -3em; }
+    div#GiftCenter div#actions button {
+      width: 6em; }
+      div#GiftCenter div#actions button #b-cancel {
+        float: left; }
+      div#GiftCenter div#actions button #b-confirm {
+        float: right;
+        color: red; }
 

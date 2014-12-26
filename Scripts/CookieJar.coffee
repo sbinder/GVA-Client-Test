@@ -7,12 +7,17 @@ class @CookieJar
       return result if (result?) 
       # fallback to local storage
       result = @readLocal name
+      return result if (result?)
+      # fallback to session storage
+      result = @readSession name
       return result
    
    @write: (name, val, expire = null) ->
       @writeCookie(name, val, expire)
-      # alswo write to local storage as backp
+      # also write to local storage as backp
       @writeLocal(name, val, expire)
+      # write to session as well
+      @writeSession(name, val)
 
    @readCookie: (name) ->
       cname = name + '='
@@ -29,11 +34,12 @@ class @CookieJar
 
    @writeTemp: (name, val) ->
       @writeCookie(name, val)
+      # write to session as backup
+      @writeSession(name, val)
 
    @readLocal: (name) ->
       if window.Storage and window.JSON
          rw = localStorage.getItem(name)
-         #return localStorage.getItem(name) 
          return JSON.parse(rw) if (@rw?)
       return null
 
@@ -50,3 +56,21 @@ class @CookieJar
    @writeSession: (name, val) ->
       if window.Storage and window.JSON
          sessionStorage.setItem(name, JSON.stringify(val))
+
+   # Client-specific additions
+   @xwrite: (xid, oid) ->
+      now = new Date()
+      now.setDate(now.getDate + 366)   # xid expires 1 year
+      if (xid.length > 12) # only keep non-demo keys
+         @write('xid', xid, now)
+      else 
+         @writeTemp('xid', xid)
+      @writeTemp('oid', oid)
+
+   # Returns TRUE for auth failures (either machine or operator)
+   @xread: ->
+      x = @read('xid')
+      o = @read('oid')       
+      $('#XID').val(x)
+      $('#OID').val(o)
+      return x == '' || o == ''

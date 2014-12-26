@@ -9,7 +9,9 @@ class @IndexViewController
       $('#eulaForm input[type="submit"]').click (event) =>
          event.preventDefault()
          @XID = '0'  # new flag
-         @initialAuth()
+         $('div#EULA').hide()
+         $('div#Register1').fadeIn()
+         #@initialAuth()
       $('#reg1demo').click (event) =>
          event.preventDefault()
          CookieJar.writeTemp('xid', 1)  #temp cookie
@@ -18,18 +20,15 @@ class @IndexViewController
          event.preventDefault()
          @registerMachine()
 
-      #jar = new CookieJar
-
-      #jar.writeCookie('xid','')
-      #@XID = jar.readCookie('xid')
       @XID = CookieJar.read('xid')
+      $('#EULA').show()
 
+   ###
       if (@XID? && @XID != '')
          @initialAuth() 
       else 
          $('#EULA').show()
 
-      #jar.writeCookie('xid','TEST')
 
    initialAuth: ->
       @showConnecting()
@@ -37,7 +36,7 @@ class @IndexViewController
       $.ajax({
          type: 'GET',
          #url: 'http://localhost:54870/api/initial/' + @XID,
-         url: @API + 'api/initial/' + @XID,
+         url: @API + 'client/initial/' + @XID,
          success: (data, status, jqxhr)=>
             @gotInit(data)
       })
@@ -46,21 +45,21 @@ class @IndexViewController
       # store info
       
       # TEST ONLY
-      #alert 'Got init.'
+      #alert data
       $('#keyhole').html(data)
       ## TEST
 
       @hideAll()
-      d = $.parseJSON(data)      
-      #alert d.Key
-      if d.Key == 0
+      d = data.Token
+      if d == "0"   #d.Key == 0
          $('div#Register1').fadeIn()
          return
-      if d.Key == 1  # DEMO Mode
+      if d == "1"   #d.Key == 1  # DEMO Mode
          $('input#username').val("Demonstration").attr("disabled", "disabled")
          $('input#password').val("Demonstration").attr("disabled", "disabled")
-      if d.Key == 1 || d.Key.length > 12
+      if d == "1" || d.length > 12 #d.Key == 1 || d.Key.length > 12
          $('div#Signin').fadeIn()
+   ###   
    
    hideAll: ->
       $('div#connecting').hide()

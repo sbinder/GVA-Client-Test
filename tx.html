@@ -5,7 +5,7 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Content/GvaClient.css" rel="stylesheet" />
-
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700|Medula+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <div id="TXCenter">
@@ -39,17 +39,30 @@
         </nav>
         <div>
             <form id="TX">
-                <input type="text" class="form-control" id="ActTel" placeholder="Account or Telephone Number" />
+                <input type="hidden" id="XID" name="XID" value=""/>
+                <input type="hidden" id="OID" name="OID" value="" />
+                <input type="text" class="form-control" id="ActTel" name="ActTel" placeholder="Account or Telephone Number" />
                 <button type="button" id="lookupAct" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-credit-card"></i> Account</button>
                 <button type="button" id="lookupTel" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-earphone"></i> Telephone</button>
             </form>
         </div>
-        <!--
-            <h2>This is a page.</h2>
-            This is some text.
-            <div id="keyhole"></div>
-            -->
     </div>
+    <div id="GiftCenter">
+        <div class="clearfix">
+            <div id="current">CURRENT<br /><span class="val"></span></div>
+            <div id="new">NEW<br /><span class="val"></span></div>
+            <div id="plusminus">
+                <button class="btn btn-sm btn-success plus">ADD +</button>
+                <button class="btn btn-sm btn-danger minus">DED -</button>
+            </div>
+            <div id="amount"></div>
+        </div>
+        <div id="actions">
+            <button id="b-cancel" class="btn btn-sm btn-default">CANCEL</button>
+            <button id="b-confirm" class="btn btn-sm btn-primary pull-right">CONFIRM </button>
+        </div>
+    </div>
+
     <script src="Scripts/jquery-2.1.1.min.js"></script>
     <script src="Scripts/jquery-ui-1.11.2.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>

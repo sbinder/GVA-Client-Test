@@ -9,6 +9,10 @@
         return result;
       }
       result = this.readLocal(name);
+      if ((result != null)) {
+        return result;
+      }
+      result = this.readSession(name);
       return result;
     };
 
@@ -17,7 +21,8 @@
         expire = null;
       }
       this.writeCookie(name, val, expire);
-      return this.writeLocal(name, val, expire);
+      this.writeLocal(name, val, expire);
+      return this.writeSession(name, val);
     };
 
     CookieJar.readCookie = function(name) {
@@ -49,7 +54,8 @@
     };
 
     CookieJar.writeTemp = function(name, val) {
-      return this.writeCookie(name, val);
+      this.writeCookie(name, val);
+      return this.writeSession(name, val);
     };
 
     CookieJar.readLocal = function(name) {
@@ -84,6 +90,27 @@
       if (window.Storage && window.JSON) {
         return sessionStorage.setItem(name, JSON.stringify(val));
       }
+    };
+
+    CookieJar.xwrite = function(xid, oid) {
+      var now;
+      now = new Date();
+      now.setDate(now.getDate + 366);
+      if (xid.length > 12) {
+        this.write('xid', xid, now);
+      } else {
+        this.writeTemp('xid', xid);
+      }
+      return this.writeTemp('oid', oid);
+    };
+
+    CookieJar.xread = function() {
+      var o, x;
+      x = this.read('xid');
+      o = this.read('oid');
+      $('#XID').val(x);
+      $('#OID').val(o);
+      return x === '' || o === '';
     };
 
     return CookieJar;

@@ -4,20 +4,18 @@
   this.IndexViewController = (function() {
     IndexViewController.prototype.API = 'http://localhost:54870/';
 
-    IndexViewController.prototype.XID = null;
-
     function IndexViewController() {
       this.SigninAuth = __bind(this.SigninAuth, this);
       this.initialAuth = __bind(this.initialAuth, this);
       this.hideAll();
+      CookieJar.xread();
       $('#signinForm input[type="submit"]').click((function(_this) {
         return function(event) {
           event.preventDefault();
           return _this.SignIn();
         };
       })(this));
-      this.XID = CookieJar.read('xid');
-      if ((this.XID != null) && this.XID !== '') {
+      if ($('#XID').val() !== '') {
         this.initialAuth();
       } else {
         window.location.replace('register.html');
@@ -25,13 +23,13 @@
     }
 
     IndexViewController.prototype.initialAuth = function() {
-      if ((this.XID == null) || this.XID === '') {
+      if ($('#XID').val() === '') {
         return;
       }
       this.showConnecting();
       return $.ajax({
         type: 'GET',
-        url: this.API + 'api/initial/' + this.XID,
+        url: this.API + 'client/initial/' + $('#XID').val(),
         success: (function(_this) {
           return function(data, status, jqxhr) {
             return _this.gotInit(data);
@@ -43,7 +41,7 @@
     IndexViewController.prototype.SigninAuth = function() {
       var dat;
       dat = $('form#signinForm').serialize();
-      if ((this.XID == null) || this.XID === '') {
+      if ($('#XID').val() === '') {
         return;
       }
       this.showConnecting();
@@ -60,40 +58,25 @@
     };
 
     IndexViewController.prototype.gotLogin = function(data) {
-      var d;
-      d = $.parseJSON(data);
-      CookieJar.write('xid', d.xid);
-      CookieJar.write('oid', d.oid);
+      CookieJar.xwrite(data.Token, data.Auth);
       return window.location.replace('tx.html');
-
-      /* store info
-      
-       * TEST ONLY
-      $('#keyhole').html(data)
-       * TEST
-      
-      @hideAll()
-       *d = $.parseJSON(data)      
-      $('#TXCenter').fadeIn()
-      $('#ActTel').focus()
-       */
     };
 
     IndexViewController.prototype.gotInit = function(data) {
       var d;
-      $('#keyhole').html(data);
       this.hideAll();
-      d = $.parseJSON(data);
-      if (d.Key === 0) {
+      d = data.Token;
+      CookieJar.write('xid', d);
+      if (d === '0') {
         window.location.replace('register.html');
         return;
       }
-      if (d.Key === 1) {
+      if (d === '1') {
         $('input#username').val("Demonstration").attr("readonly", "readonly");
         $('input#password').val("Demonstration").attr("readonly", "readonly");
       }
-      if (d.Key === 1 || d.Key.length > 12) {
-        $('#XID').val(d.Key);
+      if (d === '1' || d.length > 12) {
+        $('#XID').val(d);
         return $('div#Signin').fadeIn();
       }
     };
